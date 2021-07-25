@@ -12,6 +12,7 @@ function TodoForm({ addTodo }){
    };
 
    return (
+
        <form onSubmit={handleSubmit}>
          <input
            type="text"

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Todo from './component/Todo'
 import TodoForm from './component/TodoForm'
 import Header from './component/Header'
@@ -7,12 +7,12 @@ import Footer from './component/Footer'
 function App() {
 
     const [todos, setTodos ] = React.useState([
-      { text: "Complete online JavaScript course", isCompleted: false },
-      { text: "Jog arounf the park 3X", isCompleted: false },
-      { text: "10 minutes meditation", isCompleted: false },
-      { text: "Pick up groceries", isCompleted: false },
-      { text: "Complete online HTML, CSS course", isCompleted: false },
-      { text: "Go out with my friends", isCompleted: false },
+      { id: 1, text: "Complete online JavaScript course", isCompleted: false },
+      { id: 2, text: "Jog arounf the park 3X", isCompleted: false },
+      { id: 3, text: "10 minutes meditation", isCompleted: false },
+      { id: 4, text: "Pick up groceries", isCompleted: false },
+      { id: 5, text: "Complete online HTML, CSS course", isCompleted: false },
+      { id: 6, text: "Go out with my friends", isCompleted: false },
 
     ])
 
@@ -22,7 +22,7 @@ function App() {
       setTodos(newTodos)
     }
 
-    // Complete a task
+    // update a complete a task
     const CompleteTodo = index => {
       const newTodos = [...todos];
       newTodos[index].isCompleted = true;
@@ -37,16 +37,64 @@ function App() {
     }
 
 
+    // Update todo
+    const [ isEditing, setIsEditing ] = useState(false)
+    const [ currentTodo, setCurrentTodo ] = useState({})
+
+    // function to get the value of the edit input and set the new state
+    function handleEditInputChange(e) {
+      setCurrentTodo({ ...currentTodo, text: e.target.value });
+      //console.log(currentTodo);
+    }
+    // function to handle when the "Edit" button is clicked
+    function handleEditClick(todo) {
+      setIsEditing(true);
+      setCurrentTodo({ ...todo });
+    }
+
+     // function to edit a todo item
+     function handleUpdateTodo(id, updatedTodo) {
+       const updatedItem = todos.map((todo) => {
+         return todo.id === id ? updatedTodo : todo;
+       });
+
+       setIsEditing(false);
+       setTodos(updatedItem);
+     }
+
+     function handleEditFormSubmit(e) {
+        e.preventDefault();
+        handleUpdateTodo(currentTodo.id, currentTodo);
+      }
+
     return(
       <div id="main">
         <Header />
 
-        <div className="current-typing">
+        {isEditing ? (
+          <div className="current-typing">
           <button className="checkbox" name="current-task" aria-label="add task" disabled></button>
-          <TodoForm addTodo={addTodo} id="task" placeholder="Currently typing"/>
-        </div>
+            <form onSubmit={handleEditFormSubmit}>
+              <input
+                name="editTodo"
+                type="text"
+                placeholder="Edit todo"
+                value={currentTodo.text}
+                onChange={handleEditInputChange}
+                className="input"
+              />
+            </form>
+            <button className="btn-update" type="submit">Update</button>
+            <button className="btn-cancel" onClick={() => setIsEditing(false)}>Cancel</button>
+          </div>
+          ) : (
+            <div className="current-typing">
+              <button className="checkbox" name="current-task" aria-label="add task" disabled></button>
+              <TodoForm addTodo={addTodo} id="task" placeholder="Currently typing"/>
+            </div>
+        )}
 
-        <div className="todo-app">
+          <div className="todo-app">
             <div className="todo-list">
               <ul className="list">
                   {todos.map(( todo, index) => (
@@ -58,6 +106,7 @@ function App() {
                           index={index}
                           CompleteTodo={CompleteTodo}
                           removeTodo={removeTodo}
+                          handleEditClick={handleEditClick}
                         />
                       </div>
                     </li>

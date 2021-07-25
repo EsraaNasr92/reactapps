@@ -209,3 +209,19 @@ button {
      display: flex;
    }
 }
+.edit {
+    float: right;
+    padding: 18px 0;
+    font-size: 18px;
+    color: #3a3d59;
+}
+.btn-update, .btn-cancel {
+    background: #197428;
+    margin: 0 10px;
+    padding: 5px;
+    border-radius: 3px;
+    color: #fff;
+}
+.btn-cancel {
+    background:red;
+}
