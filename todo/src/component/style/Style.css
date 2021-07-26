@@ -225,3 +225,10 @@ button {
 .btn-cancel {
     background:red;
 }
+.btn-group {
+    float: right;
+    margin-top: 15px;
+}
+.editInput {
+    float: left;
+}

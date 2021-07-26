@@ -75,17 +75,22 @@ function App() {
           <div className="current-typing">
           <button className="checkbox" name="current-task" aria-label="add task" disabled></button>
             <form onSubmit={handleEditFormSubmit}>
-              <input
-                name="editTodo"
-                type="text"
-                placeholder="Edit todo"
-                value={currentTodo.text}
-                onChange={handleEditInputChange}
-                className="input"
-              />
+              <div className="editInput">
+                <input
+                  name="editTodo"
+                  type="text"
+                  placeholder="Edit todo"
+                  value={currentTodo.text}
+                  onChange={handleEditInputChange}
+                  className="input"
+                />
+              </div>
+              <div className="btn-group">
+                  <button className="btn-update" type="submit">Update</button>
+                  <button className="btn-cancel" onClick={() => setIsEditing(false)}>Cancel</button>
+              </div>
             </form>
-            <button className="btn-update" type="submit">Update</button>
-            <button className="btn-cancel" onClick={() => setIsEditing(false)}>Cancel</button>
+
           </div>
           ) : (
             <div className="current-typing">
