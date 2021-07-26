@@ -232,3 +232,75 @@ button {
 .editInput {
     float: left;
 }
+.todo-footer, .todo-footer-mobile {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    background-color: rgb(37, 39, 60);
+    border-top: 1px solid rgb(119, 122, 146);
+    border-radius: 0 0 4px 4px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: rgb(202, 205, 232);
+}
+.todo-footer button, .todo-footer-mobile button{
+  color: rgb(202, 205, 232);
+  text-decoration: none;
+  cursor: pointer;
+}
+.todo-footer button:hover, .todo-footer-mobile button:hover {
+  color: #2323e3;
+}
+.filter ul button{
+    display: flex;
+    justify-content: space-between;
+}
+.filter ul button li  {
+    padding: 0px 0.4rem;
+}
+.todo-footer-mobile, .filter-mobile{
+  display: none;
+}
+.reorder{
+  font-size: 1rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+.copyright{
+  font-size: 1rem;
+  text-align: center;
+}
+.light .header .current-typing, .light .arrange, .light .todo-footer, .light .filter-mobile, .light .todo-footer-mobile {
+  background:  rgb(255, 255, 255);
+
+}
+.light .current-typing form input, .light .list-text button, .light .todo-footer, .light .todo-footer a, .light .filter-mobile ul li a, .light .todo-footer-mobile, .light .todo-footer-mobile a{
+    color: #000;
+}
+.filter-mobile {
+    display: none;
+    justify-content: center;
+    margin-top: 20px;
+    background: #25273c;
+    padding: 20px;
+    border-radius: 4px;
+}
+.filter-mobile ul li {
+    display: inline-block;
+}
+.filter-mobile ul li a{
+  color: rgb(202, 205, 232);
+  text-decoration: none;
+
+}
+@media only screen and (max-width: 512px) {
+  .header, .todo-app{
+    width: 100%;
+  }
+  .todo-footer{
+    display: none;
+  }
+   .todo-footer-mobile , .filter-mobile{
+     display: flex;
+   }
+}

@@ -3,6 +3,15 @@ import Todo from './component/Todo'
 import TodoForm from './component/TodoForm'
 import Header from './component/Header'
 import Footer from './component/Footer'
+import FilterButton from './component/FilterButton'
+
+// for filter
+const FILTER_MAP ={
+  All: () => true,
+  Active: task => !task.isCompleted,
+  Complete: task => task.isCompleted
+}
+const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App() {
 
@@ -67,6 +76,10 @@ function App() {
         handleUpdateTodo(currentTodo.id, currentTodo);
       }
 
+
+      // Add filter
+      const [filter, setFilter] = useState('All')
+
     return(
       <div id="main">
         <Header />
@@ -102,7 +115,7 @@ function App() {
           <div className="todo-app">
             <div className="todo-list">
               <ul className="list">
-                  {todos.map(( todo, index) => (
+                  {todos.filter(FILTER_MAP[filter]).map(( todo, index) => (
                     <li key={index}>
                       <div className="arrange">
                         <Todo
@@ -117,6 +130,24 @@ function App() {
                     </li>
                 ))}
             </ul>
+            <div className="todo-footer">
+                <div className="">5  items left</div>
+                 <div class="filter">
+                    <ul>
+                        {FILTER_NAMES.map(name => (
+                          <li key={name}>
+                              <FilterButton
+                                key={name}
+                                name={name}
+                                isPressed={name === filter}
+                                setFilter={setFilter}
+                               />
+                            </li>
+                        ))}
+                      </ul>
+                    </div>
+                <div className="clearCompleted"><a href="#">Clear Completed</a></div>
+            </div>
           </div>
         </div>
       </div>
