@@ -80,6 +80,15 @@ function App() {
       // Add filter
       const [filter, setFilter] = useState('All')
 
+
+      // Remove Completed Task
+      const removeCompletedTodo = id => {
+        setTodos(todos.filter(todo => todo.isCompleted !== true));
+      };
+
+
+
+
     return(
       <div id="main">
         <Header />
@@ -131,8 +140,8 @@ function App() {
                 ))}
             </ul>
             <div className="todo-footer">
-                <div className="">5  items left</div>
-                 <div class="filter">
+                <div className=""> {todos.filter(todo => todo.id).length}    items left</div>
+                 <div className="filter">
                     <ul>
                         {FILTER_NAMES.map(name => (
                           <li key={name}>
@@ -146,7 +155,7 @@ function App() {
                         ))}
                       </ul>
                     </div>
-                <div className="clearCompleted"><a href="#">Clear Completed</a></div>
+              <div className="clearCompleted"><button onClick={() => removeCompletedTodo()}>Clear Completed</button></div>
             </div>
           </div>
         </div>

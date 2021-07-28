@@ -1,7 +1,7 @@
 import React from 'react'
 import iconCross from './images/iconCross.svg'
 
-function Todo({ todo, index, CompleteTodo, removeTodo, handleEditClick }){
+function Todo({ todo, index, CompleteTodo, removeTodo, handleEditClick  }){
 
   let id= '';
   if(todo.isCompleted){
@@ -16,7 +16,6 @@ function Todo({ todo, index, CompleteTodo, removeTodo, handleEditClick }){
         <img src={iconCross} alt="Remove todo" />
       </button>
       <button className="edit" onClick={() => handleEditClick(todo)}><i className="fas fa-edit"></i></button>
-
     </div>
   )
 }
